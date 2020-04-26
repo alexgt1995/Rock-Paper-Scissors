@@ -1,0 +1,90 @@
+<!DOCTYPE html
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock, Paper, Scissors</title>
+        <link href="styles/rock.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1> Choose your Weapon </h1>
+        <ul>
+            <il><button onclick="playRound('rock', computerPlay())">Rock</button></il>
+            <il><button onclick="playRound('paper', computerPlay())">Paper</button></il>
+            <il><button onclick="playRound('scissors', computerPlay())">Scissors</button></il>
+        </ul>
+        <h2 id="h2">Player - Score</h2>
+        <h3 id="h3">
+            <p id="playerscore">0</p>
+            <p>-</p>
+            <p id="computerscore">0</p>
+        </h3>
+    </body>
+    <script>
+        let playerScore = 0;
+        let computerScore = 0;
+        function computerPlay(){ //returns the computer's choice
+            let computerChoice = Math.floor(Math.random()*3);
+            switch(computerChoice){
+                case 0: return "rock";
+                break;
+                case 1: return "paper";
+                break;
+                case 2: return "scissors";
+                break;
+            }
+        }
+        function playRound(playerSelection, computerSelection){
+            playerPick = playerSelection;
+            if(playerPick == computerSelection){
+                document.getElementById("h2").innerHTML =("You both picked " + computerSelection);
+            } else if(playerPick == "rock"){
+                if(computerSelection == "paper"){
+                    document.getElementById("h2").innerHTML =("Paper beats rock");
+                    computerScore++;
+                    document.getElementById("computerscore").innerHTML = computerScore;
+                } else if(computerSelection == "scissors"){
+                    document.getElementById("h2").innerHTML =("Rock beats scissors");
+                    playerScore++;
+                    document.getElementById("playerscore").innerHTML = playerScore;
+                }
+            } else if(playerPick == "paper"){
+                if(computerSelection == "rock"){
+                    document.getElementById("h2").innerHTML =("Paper beats rock");
+                    playerScore++;
+                    document.getElementById("playerscore").innerHTML = playerScore; 
+                } else if(computerSelection == "scissors"){
+                    document.getElementById("h2").innerHTML =("Scissors beats paper");
+                    computerScore++;
+                    document.getElementById("computerscore").innerHTML = computerScore;
+                }
+            } else if(playerPick == "scissors"){
+                if(computerSelection == "rock"){
+                    document.getElementById("h2").innerHTML =("Rock beats scissors");
+                    computerScore++;
+                    document.getElementById("computerscore").innerHTML = computerScore;
+                } else if(computerSelection == "paper"){
+                    document.getElementById("h2").innerHTML =("Scissors beats paper");
+                    playerScore++;
+                    document.getElementById("playerscore").innerHTML = playerScore;
+                }
+            }
+            if(playerScore==5){
+                playerScore = 0;
+                computerScore = 0;
+                document.getElementById("playerscore").innerHTML = playerScore;
+                document.getElementById("computerscore").innerHTML = computerScore;
+                document.getElementById("h2").innerHTML = "You win, why don't you play again?"
+                
+            }
+            if(computerScore==5){
+                playerScore = 0;
+                computerScore = 0;
+                document.getElementById("playerscore").innerHTML = playerScore;
+                document.getElementById("computerscore").innerHTML = computerScore;
+                document.getElementById("h2").innerHTML = "You lose, why don't you try again?"
+                
+            }
+        }
+    </script>
+
+</html>
